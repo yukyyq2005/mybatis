@@ -21,7 +21,7 @@ public class DemoController {
 
     @GetMapping("/test")
     public Object test() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             DisplayMessage thread1 = new DisplayMessage("线程1");
             thread1.setObject(userService);
             thread1.start();
