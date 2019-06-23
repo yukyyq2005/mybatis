@@ -16,7 +16,11 @@ Welcome<br/>
 
     //判断当前浏览器是否支持WebSocket
     if('WebSocket' in window){
-        websocket = new WebSocket("ws://localhost:80/websocket/567");
+        //websocket = new WebSocket("ws://localhost:80/websocket/567");
+        //下面是压力测试
+        for (i = 0; i < 1000; i++) {
+            websocket = new WebSocket("ws://localhost:80/websocket/"+i);
+        }
     }
     else{
         alert('Not support websocket')
