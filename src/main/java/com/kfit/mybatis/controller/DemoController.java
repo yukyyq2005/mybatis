@@ -1,4 +1,4 @@
-package com.kfit.mybatis;
+package com.kfit.mybatis.controller;
 
 import com.kfit.mybatis.service.UserService;
 import com.kfit.mybatis.domain.User;
