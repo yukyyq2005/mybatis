@@ -21,20 +21,20 @@ public class DemoController {
 
     @GetMapping("/test")
     public Object test() {
-        for (int i = 0; i < 10; i++) {
-            DisplayMessage thread1 = new DisplayMessage("线程1");
-            thread1.setObject(userService);
-            thread1.start();
-        }
-        return "ok";
+//        for (int i = 0; i < 10; i++) {
+//            DisplayMessage thread1 = new DisplayMessage("线程1");
+//            thread1.setObject(userService);
+//            thread1.start();
+//        }
+//        return "ok";
 
 //        User user = new User();
 //        user.setId(1);
 //        user.setName("你");
 //        user.setAge(34);
 //        userMapper.getUser(1);
-//       // user = userMapper.getUser(1);
-//        return user;
+         User user = userService.getUser(1);
+        return user;
     }
 }
 

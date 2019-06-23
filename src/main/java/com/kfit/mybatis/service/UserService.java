@@ -21,7 +21,8 @@ public class UserService {
 
     //@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRES_NEW)
     public User getUser(int id) {
-        return userMapper.getUser(id);
+        User user = userMapper.getUser(id);
+        return user;
     }
 
     @Transactional
