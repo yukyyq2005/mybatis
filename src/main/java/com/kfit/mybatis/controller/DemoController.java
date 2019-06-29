@@ -56,6 +56,7 @@ public class DemoController {
         // 保存操作记录
        // List<TSysUpdateLog> records = new ArrayList<>();
 // 异步写日志
+        //测试
         User user1 = new User();
         user1.setAge(234);
         user1.setName("马云1");
