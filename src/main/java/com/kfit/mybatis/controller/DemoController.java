@@ -58,7 +58,8 @@ public class DemoController {
         User user1 = new User();
         user1.setAge(234);
         user1.setName("马云");
-        operationLogSaver.putRecord(user1);
+        OperationLogSaver operation =  new OperationLogSaver();
+        operation.putRecord(user1);
          User user = userService.getUser(1);
         return user;
     }
