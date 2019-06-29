@@ -1,9 +1,11 @@
 package com.kfit.mybatis.controller;
 
+import com.kfit.mybatis.OperationLogSaver;
 import com.kfit.mybatis.service.UserService;
 import com.kfit.mybatis.domain.User;
 import com.kfit.mybatis.other.DisplayMessage;
 import com.kfit.mybatis.test.WebSocketTest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +22,8 @@ public class DemoController {
 
     @Resource
     private UserService userService;
+    @Autowired
+    private OperationLogSaver operationLogSaver;
 
     @GetMapping("/socket")
     public Object testh(@RequestParam("num") Integer num){
@@ -48,6 +52,13 @@ public class DemoController {
 //        user.setName("你");
 //        user.setAge(34);
 //        userMapper.getUser(1);
+        // 保存操作记录
+       // List<TSysUpdateLog> records = new ArrayList<>();
+// 异步写日志
+        User user1 = new User();
+        user1.setAge(234);
+        user1.setName("马云");
+        operationLogSaver.putRecord(user1);
          User user = userService.getUser(1);
         return user;
     }
