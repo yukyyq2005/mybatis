@@ -60,6 +60,7 @@ public class DemoController {
         user1.setAge(234);
         user1.setName("马云1");
         User user2 = new User();
+        user2.setId(16);
         user2.setAge(234);
         user2.setName("马云2");
         ArrayList<User> arrayList = new ArrayList<User>();
