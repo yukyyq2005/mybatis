@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 
 /**
  * @author ：youq
@@ -57,9 +58,14 @@ public class DemoController {
 // 异步写日志
         User user1 = new User();
         user1.setAge(234);
-        user1.setName("马云");
-        OperationLogSaver operation =  new OperationLogSaver();
-        operation.putRecord(user1);
+        user1.setName("马云1");
+        User user2 = new User();
+        user2.setAge(234);
+        user2.setName("马云2");
+        ArrayList<User> arrayList = new ArrayList<User>();
+        arrayList.add(user1);
+        arrayList.add(user2);
+        operationLogSaver.putRecord(arrayList);
          User user = userService.getUser(1);
         return user;
     }
