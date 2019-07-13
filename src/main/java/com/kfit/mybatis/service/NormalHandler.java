@@ -36,9 +36,20 @@ public class NormalHandler  implements InvocationHandler {
 //        for(int i=0;i<args.length;i++){
 //            System.out.println(args[i]);
 //        }
-        System.out.println("man say invoked at : " + System.currentTimeMillis());
-        method.invoke(target, args);
-        return null;
+        Object ret=null;
+        try{
+            /*原对象方法调用前处理日志信息*/
+            System.out.println("start-->>");
+            //调用目标方法
+            ret=method.invoke(target, args);
+            /*原对象方法调用后处理日志信息*/
+            System.out.println("end-->>");
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println("error-->>");
+            throw e;
+        }
+        return ret;
     }
 
     public static void main(String arg[]){
@@ -49,7 +60,6 @@ public class NormalHandler  implements InvocationHandler {
 //
         Man man = new Man();
         NormalHandler normalHandler = new NormalHandler(man);
-//        AnnotationHandler annotationHandler = new AnnotationHandler();
         IPerson iPerson = (IPerson) Proxy.newProxyInstance(IPerson.class.getClassLoader(),
                 man.getClass().getInterfaces(), normalHandler);
         iPerson.say("dd");
