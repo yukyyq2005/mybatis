@@ -55,12 +55,12 @@ public class NormalHandler  implements InvocationHandler {
     public static void main(String arg[]){
 
         NormalHandler logHandler1=new NormalHandler();
-        IPerson userManager=(IPerson)logHandler1.newProxyInstance(new Man());
-        userManager.say("xxx");
+        IPerson iPerson=(IPerson)logHandler1.newProxyInstance(new Man());
+        iPerson.say("xxx");
 //
         Man man = new Man();
         NormalHandler normalHandler = new NormalHandler(man);
-        IPerson iPerson = (IPerson) Proxy.newProxyInstance(IPerson.class.getClassLoader(),
+        iPerson = (IPerson) Proxy.newProxyInstance(IPerson.class.getClassLoader(),
                 man.getClass().getInterfaces(), normalHandler);
         iPerson.say("dd");
     }
