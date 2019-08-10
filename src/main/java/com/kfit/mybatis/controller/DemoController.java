@@ -57,7 +57,7 @@ public class DemoController {
        // List<TSysUpdateLog> records = new ArrayList<>();
 // 异步写日志
         //测试
-        User user1 = new User();
+        /*User user1 = new User();
         user1.setAge(234);
         user1.setName("马云1");
         User user2 = new User();
@@ -67,8 +67,8 @@ public class DemoController {
         ArrayList<User> arrayList = new ArrayList<User>();
         arrayList.add(user1);
         arrayList.add(user2);
-        operationLogSaver.putRecord(arrayList);
-         User user = userService.getUser(1);
+        operationLogSaver.putRecord(arrayList);*/
+        Object user = userService.getUser(1);
         return user;
     }
 }

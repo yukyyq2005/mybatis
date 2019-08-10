@@ -14,14 +14,14 @@ import org.springframework.stereotype.Component;
 public class ProducerInt {
 
   //  @Autowired
-    UserMapper userMapper;
+    //UserMapper userMapper;
     private User clerk;
 
     public ProducerInt(User clerk){
         this.clerk = clerk;
     }
     public void run() {
-        userMapper.insert(this.clerk);
+        //userMapper.insert(this.clerk);
         System.out.println("生产者开始生产整数了..................");
     }
 }

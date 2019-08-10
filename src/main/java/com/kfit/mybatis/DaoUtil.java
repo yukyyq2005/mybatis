@@ -11,15 +11,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class DaoUtil {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
-    @Autowired
-    private UserMapper userMapper;
+    //@Autowired
+   // private UserMapper userMapper;
     public final boolean batchInsert(final List<User> list) {
         boolean rt = true;
         int size = list.size();
         try {
             for (int i = 0; i < size; i++) {
                 User paramObj = list.get(i);
-                userMapper.insert(paramObj);
+                //userMapper.insert(paramObj);
             }
         } catch (Exception e) {
             logger.error(e.getMessage(),e);

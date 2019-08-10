@@ -1,50 +1,88 @@
 package com.kfit.mybatis.domain;
 
-/**
- * @author ：youq
- * @date ：Created in 2019/2/24 20:21
- * @modified By：
- */
+import java.util.Date;
+import javax.persistence.*;
 
-import java.io.Serializable;
+@Table(name = "admin")
+public class User {
+    private Integer id;
 
-/**
- * @author gacl
- * users表所对应的实体类
- */
-public class User implements Serializable {
+    private String username;
 
-    //实体类的属性和表的字段名称一一对应
-    private int id;
-    private String name;
-    private int age;
+    private String password;
 
-    public int getId() {
+    @Column(name = "create_time")
+    private Date createTime;
+
+    private String salt;
+
+    /**
+     * @return id
+     */
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    /**
+     * @param id
+     */
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    /**
+     * @return username
+     */
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    /**
+     * @param username
+     */
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
-    public int getAge() {
-        return age;
+    /**
+     * @return password
+     */
+    public String getPassword() {
+        return password;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    /**
+     * @param password
+     */
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", name=" + name + ", age=" + age + "]";
+    /**
+     * @return create_time
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    /**
+     * @param createTime
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    /**
+     * @return salt
+     */
+    public String getSalt() {
+        return salt;
+    }
+
+    /**
+     * @param salt
+     */
+    public void setSalt(String salt) {
+        this.salt = salt == null ? null : salt.trim();
     }
 }

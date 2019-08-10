@@ -1,10 +1,12 @@
 package com.kfit.mybatis.service;
 
 import com.kfit.mybatis.service.Impl.Man;
+import org.apache.ibatis.javassist.compiler.SymbolTable;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.math.BigDecimal;
 
 /**
  * @author ：youq
@@ -63,6 +65,22 @@ public class NormalHandler  implements InvocationHandler {
         iPerson = (IPerson) Proxy.newProxyInstance(IPerson.class.getClassLoader(),
                 man.getClass().getInterfaces(), normalHandler);
         iPerson.say("dd");
+
+        double a=0.3;
+        double b=0.1;
+        double g = a-b;
+        BigDecimal h = new BigDecimal(g);
+        System.out.println(a-b);
+
+        BigDecimal c = new BigDecimal("10");
+        BigDecimal d = new BigDecimal("3");
+        BigDecimal cd = c.divide(d,3,BigDecimal.ROUND_FLOOR);
+        System.out.println("c+d=:"+cd);
+        String  srr = cd.toString();
+        double e = c.floatValue();
+        double f = d.floatValue();
+        System.out.println(c.floatValue()-d.floatValue());
+
     }
 
 }
