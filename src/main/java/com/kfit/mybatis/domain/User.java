@@ -1,6 +1,7 @@
 package com.kfit.mybatis.domain;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 @Table(name = "admin")
@@ -16,6 +17,25 @@ public class User {
 
     private String salt;
 
+    //角色列表
+    private List<Role> roleList;
+    //权限列表
+    private List<Permission> permissionsList;
+
+    public List<Permission> getPermissionsList() {
+        return permissionsList;
+    }
+
+    public void setPermissionsList(List<Permission> permissionsList) {
+        this.permissionsList = permissionsList;
+    }
+
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
     /**
      * @return id
      */

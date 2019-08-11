@@ -1,10 +1,15 @@
 package com.kfit.mybatis.controller;
 
 import com.kfit.mybatis.OperationLogSaver;
+import com.kfit.mybatis.dao.UserMapper;
 import com.kfit.mybatis.service.UserService;
 import com.kfit.mybatis.domain.User;
 import com.kfit.mybatis.other.DisplayMessage;
 import com.kfit.mybatis.test.WebSocketTest;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author ：youq
@@ -23,6 +30,8 @@ public class DemoController {
 
     @Resource
     private UserService userService;
+    @Autowired
+    private UserMapper userMapper;
     @Autowired
     private OperationLogSaver operationLogSaver;
 
@@ -38,9 +47,49 @@ public class DemoController {
         }
         return "ok";
     }
-
-    @GetMapping("/test")
-    public Object test() {
+    @GetMapping("/video/update")
+    public Object update() {
+        Map map = new HashMap<>();
+        map.put("name","update");
+        return map;
+    }
+    @GetMapping("/authc/update")
+    public Object authc() {
+        Map map = new HashMap<>();
+        map.put("name","authc");
+        return map;
+    }
+    @GetMapping("/pub/play")
+    public Object test1() {
+        Subject subject = SecurityUtils.getSubject();
+        System.out.println("sessionid : "+subject.getSession().getId());
+        Map map = new HashMap<>();
+        map.put("sessionid",subject.getSession().getId());
+        map.put("name",subject.getPrincipal());
+        return map;
+    }
+    @GetMapping("/pub/login")
+    public Object test(@RequestParam(value="user"/*, required=false,defaultValue="二当家小D"*/) String username,
+                       @RequestParam(value="pwd"/*, required=false,defaultValue="123456"*/) String pwd) {
+        Subject subject = SecurityUtils.getSubject();
+        //用户输入的账号和密码
+        UsernamePasswordToken usernamePasswordToken =
+                new UsernamePasswordToken(username,pwd);
+        try {
+            subject.login(usernamePasswordToken);
+            System.out.println("sessionid : "+subject.getSession().getId());
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+            System.out.println("登录失败，用户名或密码错误");
+            return "登录失败";
+        }
+        User user = new User();
+        user.setUsername(username);
+        User newUser = userMapper.selectOne(user);
+        Map map = new HashMap<>();
+        map.put("user",user);
+        map.put("sessionid",subject.getSession().getId());
+        return map;
 //        for (int i = 0; i < 10; i++) {
 //            DisplayMessage thread1 = new DisplayMessage("线程1");
 //            thread1.setObject(userService);
@@ -68,8 +117,7 @@ public class DemoController {
         arrayList.add(user1);
         arrayList.add(user2);
         operationLogSaver.putRecord(arrayList);*/
-        Object user = userService.getUser(1);
-        return user;
+
     }
 }
 
